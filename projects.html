@@ -3,71 +3,60 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Proyectos - Mis Proyectos</title>
+        <title>Projects Page - HPI</title>
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
         <nav>
             <div class="logo">Human Program Interpreter</div>
+            <div class="menu-toggle">&#9776;</div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="home.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="about.html">About us</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-
         <div id="welcome-message">
-            <span>¡Bienvenido de nuevo a mi portafolio! Explora mis proyectos personales y descubre mi trabajo en tecnología! </span>
+            <span>Welcome back to my portfolio! Explore my personal projects and discover my work in technology!</span>
             <button id="close-message">&times;</button>
         </div>
-
         <section id="projects" class="fade">
-            <h1>Pagina de proyectos en construccion!</h1>
-            <p>Espera nuevas actualizaciones en breve.</p>
+            <h1>Projects page under construction!</h1>
+            <p>Expect new updates soon.</p>            
         </section>
-
         <script>
-
-            // Funcionalidad para cerrar el sub mensaje con un deslizamiento hacia arriba
             document.getElementById('close-message').addEventListener('click', function() {
                 const welcomeMessage = document.getElementById('welcome-message');
                 const projectsSection = document.getElementById('projects');
-
                 welcomeMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                 welcomeMessage.style.opacity = '0';
                 welcomeMessage.style.transform = 'translateY(-100%)';
-
-                // Ajustar el margen superior de la sección después de que el mensaje desaparezca
                 setTimeout(() => {
                     welcomeMessage.style.display = 'none';
-                    projectsSection.style.transition = 'margin-top 0.5s ease'; // Suaviza el movimiento de la sección
-                    projectsSection.style.marginTop = '70px'; // Se ajusta al menú superior
+                    projectsSection.style.transition = 'margin-top 0.5s ease';
+                    projectsSection.style.marginTop = '50px';
                 }, 500);
             });
-
-            // Transición entre secciones
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetUrl = this.getAttribute('href');
                     const fadeOutSection = document.querySelector('section.fade');
-
-                    // Efecto de desvanecimiento
-                    fadeOutSection.style.transition = 'opacity 0.5s ease'; // Asegúrate de que la transición esté aquí
+                    fadeOutSection.style.transition = 'opacity 0.5s ease';
                     fadeOutSection.style.opacity = '0';
-                    
-                    // Espera un momento antes de redirigir
                     fadeOutSection.addEventListener('transitionend', function() {
                         setTimeout(() => {
-                            window.location.href = targetUrl; // Cambia a la nueva página
-                        }, 50); // Espera un poco antes de cambiar
-                    }, { once: true }); // Asegúrate de que solo se ejecute una vez
+                            window.location.href = targetUrl;
+                        }, 50);
+                    }, { once: true });
                 });
             });
-
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
         </script>
-
     </body>
-
 </html>
