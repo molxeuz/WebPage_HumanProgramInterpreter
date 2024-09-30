@@ -1,3 +1,22 @@
+:root {
+    --background-color: #f4f4f9;
+    --text-color: #333;
+    --nav-background-color: #333;
+    --nav-text-color: #fff;
+    --welcome-background-color: #4CAF50;
+    --welcome-text-color: #fff;
+    --button-background-color: #575757;
+    --transition-time: 0.5s;
+}
+body.dark-mode {
+    --background-color: #1f1f1f;
+    --text-color: #e0e0e0;
+    --nav-background-color: #111;
+    --nav-text-color: #e0e0e0;
+    --welcome-background-color: #333;
+    --welcome-text-color: #e0e0e0;
+    --button-background-color: #444;
+}
 * {
     margin: 0;
     padding: 0;
@@ -5,15 +24,16 @@
     font-family: 'Arial', sans-serif;
 }
 body {
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     padding-top: 20px;
+    transition: background-color var(--transition-time), color var(--transition-time);
 }
 nav {
-    background-color: #333;
+    background-color: var(--nav-background-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,11 +45,13 @@ nav {
     z-index: 1000;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-bottom: #6e6e6e solid 4px;
+    transition: background-color var(--transition-time);
 }
 .logo {
-    color: #fff;
+    color: var(--nav-text-color);
     font-size: 1.5rem;
     font-weight: bold;
+    transition: color var(--transition-time);
 }
 .nav-links {
     list-style: none;
@@ -40,32 +62,32 @@ nav {
     top: 0;
     height: 100%;
     width: 250px;
-    background-color: #333;
+    background-color: var(--nav-background-color);
     flex-direction: column;
     justify-content: center;
-    transition: right 0.3s ease-in-out;
+    transition: right 0.3s ease-in-out, background-color var(--transition-time);
 }
 .nav-links.active {
     right: 0;
 }
 .nav-links a {
-    color: #fff;
+    color: var(--nav-text-color);
     text-decoration: none;
     padding: 0.75rem 1rem;
     font-size: 1.2rem;
-    transition: background 0.3s;
+    transition: background 0.3s, color var(--transition-time);
     display: block;
     width: 100%;
     text-align: center;
 }
 .nav-links a:hover {
-    background-color: #575757;
+    background-color: var(--button-background-color);
     border-radius: 5px;
 }
 .menu-toggle {
     font-size: 2rem;
     cursor: pointer;
-    color: #fff;
+    color: var(--nav-text-color);
     display: block;
     z-index: 1001;
 }
@@ -74,23 +96,29 @@ section {
     padding: 2rem;
     text-align: center;
 }
+.construction {
+    font-family: "Pirata One", system-ui;
+    font-size: 50px;
+}
 h1 {
     font-size: 2.5rem;
-    color: #333;
+    color: var(--text-color);
+    transition: color var(--transition-time);
 }
 p {
     font-size: 1.2rem;
     margin-top: 1rem;
-    color: #555;
+    color: var(--text-color);
+    transition: color var(--transition-time);
 }
 #welcome-message {
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: var(--welcome-background-color);
+    color: var(--welcome-text-color);
     padding: 20px;
     text-align: center;
     position: fixed;
     width: 100%;
-    top: 70px;
+    top: 75px;
     z-index: 999;
     display: flex;
     justify-content: center;
@@ -107,13 +135,27 @@ p {
 #welcome-message button {
     background: none;
     border: none;
-    color: #fff;
+    color: var(--welcome-text-color);
     font-size: 1.8rem;
     margin-left: 20px;
     cursor: pointer;
 }
 #home {
-    margin-top: 150px;
+    margin-top: 170px;
+}
+#dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--button-background-color);
+    border: none;
+    color: var(--nav-text-color);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    z-index: 1000;
+    transition: background-color var(--transition-time), color var(--transition-time);
 }
 @media (min-width: 769px) {
     .nav-links {
@@ -124,15 +166,17 @@ p {
         justify-content: flex-end;
         background-color: transparent;
     }
+
     .menu-toggle {
         display: none;
     }
+
     .nav-links li {
         margin-left: 20px;
     }
+
     .nav-links a {
-        font-size: 1.1rem;
-        padding: 0.75rem 1rem;
+        font-size: 1rem;
     }
 }
 .fade {
@@ -172,7 +216,7 @@ p {
     #welcome-message {
         font-size: 1rem;
         padding: 15px;
-        top: 60px;
+        top: 65px;
     }
     #welcome-message span {
         font-size: 1rem;
@@ -185,6 +229,6 @@ p {
     }
     section {
         padding: 1.5rem;
-        margin-top: 120px; 
+        margin-top: 130px; 
     }
 }

@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contact Page - HPI</title>
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/styles_contact.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=UnifrakturMaguntia&display=swap');
+        </style>
     </head>
     <body>
         <nav>
@@ -17,13 +21,14 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
+        <button id="dark-mode-toggle">Dark Mode</button>
         <div id="welcome-message">
             <span>Welcome back to my portfolio! Explore my personal projects and discover my work in technology!</span>
             <button id="close-message">&times;</button>
         </div>
         <section id="contact" class="fade">
-            <h1>Contact page under construction!</h1>
-            <p>Expect new updates soon.</p>            
+            <h1 class="construction">Contact page under construction!</h1>
+            <p class="construction">Expect new updates soon.</p>            
         </section>
         <script>
             document.getElementById('close-message').addEventListener('click', function() {
@@ -35,7 +40,7 @@
                 setTimeout(() => {
                     welcomeMessage.style.display = 'none';
                     contactSection.style.transition = 'margin-top 0.5s ease';
-                    contactSection.style.marginTop = '50px';
+                    contactSection.style.marginTop = '70px';
                 }, 500);
             });
             document.querySelectorAll('.nav-links a').forEach(link => {
@@ -56,6 +61,43 @@
             const navLinks = document.querySelector('.nav-links');
             menuToggle.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                const darkMode = localStorage.getItem('dark-mode');
+                if (darkMode === 'enabled') {
+                    document.body.classList.add('dark-mode');
+                }
+                const enableDarkMode = () => {
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('dark-mode', 'enabled');
+                };
+                const disableDarkMode = () => {
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('dark-mode', 'disabled');
+                };
+                const darkModeToggle = document.getElementById('dark-mode-toggle');
+                darkModeToggle.addEventListener('click', () => {
+                    const darkMode = localStorage.getItem('dark-mode');
+                    if (darkMode !== 'enabled') {
+                        enableDarkMode();
+                    } else {
+                        disableDarkMode();
+                    }
+                });
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetUrl = this.getAttribute('href');
+                        const fadeOutSection = document.querySelector('section.fade');
+                        fadeOutSection.style.transition = 'opacity 0.5s ease';
+                        fadeOutSection.style.opacity = '0';
+                        fadeOutSection.addEventListener('transitionend', function() {
+                            setTimeout(() => {
+                                window.location.href = targetUrl;
+                            }, 50);
+                        }, { once: true });
+                    });
+                });
             });
         </script>
     </body>
