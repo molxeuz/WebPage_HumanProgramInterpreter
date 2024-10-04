@@ -30,6 +30,17 @@
             <h1 class="construction">Home page under construction!</h1>
             <p class="construction">Expect new updates soon.</p>            
         </section>
+        <section>
+            <h2 class="comment-title">Comments area:</h2>
+            <div id="comment-box">
+                <label for="name-input">Share your name with us:</label>
+                <input type="text" id="name-input" placeholder="Add your name..." /><br>
+                <label for="comment-text">What do you have in mind?</label>
+                <textarea id="comment-text" style="resize: none;" placeholder="Leave a comment..."></textarea><br>
+                <button id="submit-comment">Publish comment</button>
+            </div>
+            <div id="comment-list" class="comment-list"></div>                                             
+        </section>
         <script>
             document.getElementById('close-message').addEventListener('click', function() {
                 const welcomeMessage = document.getElementById('welcome-message');
@@ -98,6 +109,83 @@
                         }, { once: true });
                     });
                 });
+            });
+        </script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
+            import { getFirestore, collection, query, orderBy, onSnapshot, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+
+            // Tu configuración de Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyACwgkG2MRieLB3QCJdHF4nIrZJGVvx3Pw",
+                authDomain: "humanprograminterpreter.firebaseapp.com",
+                projectId: "humanprograminterpreter",
+                storageBucket: "humanprograminterpreter.appspot.com",
+                messagingSenderId: "127925229010",
+                appId: "1:127925229010:web:fe28a79d821ebaf829a40b",
+                measurementId: "G-BVZR63CLHL"
+            };
+
+            // Inicializa Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+
+            // Inicializa Firestore
+            const db = getFirestore(app);
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const commentList = document.getElementById('comment-list');
+                const commentText = document.getElementById('comment-text');
+                const nameInput = document.getElementById('name-input');
+                const submitComment = document.getElementById('submit-comment');
+
+                // Referencia a la colección de comentarios en Firestore
+                const commentsRef = collection(db, 'comments');
+
+                // Función para cargar y mostrar comentarios desde Firebase Firestore
+                function loadComments() {
+                    const q = query(commentsRef, orderBy('timestamp', 'desc'));
+                    onSnapshot(q, (snapshot) => {
+                        commentList.innerHTML = ''; // Limpiar la lista de comentarios antes de recargar
+                        snapshot.forEach((doc) => {
+                            const commentData = doc.data();
+                            const commentDiv = document.createElement('div');
+                            commentDiv.classList.add('comment-item'); // Añadir clase para estilos
+                            commentDiv.style.textAlign = 'left'; // Alinear texto a la izquierda
+                            commentDiv.innerHTML = `
+                                <p><strong>${commentData.name}:</strong> ${commentData.text}</p>
+                                <small>${new Date(commentData.timestamp?.toDate()).toLocaleString()}</small>
+                            `;
+                            commentList.appendChild(commentDiv);
+                        });
+                    });
+                }
+
+                submitComment.addEventListener('click', function() {
+                    const newComment = commentText.value;
+                    const name = nameInput.value;
+
+                    if (newComment.trim() !== "" && name.trim() !== "") {
+                        // Código para agregar el comentario a Firestore
+                        addDoc(commentsRef, {
+                            name: name,
+                            text: newComment,
+                            timestamp: serverTimestamp()
+                        }).then(() => {
+                            commentText.value = ''; // Limpiar el campo de texto
+                            nameInput.value = ''; // Limpiar el campo de nombre
+                        }).catch((error) => {
+                            console.error("Error al añadir comentario: ", error);
+                        });
+                    } else {
+                        console.error("El comentario o el nombre están vacíos.");
+                    }
+                });
+
+                // Cargar comentarios al iniciar la página
+                loadComments();
             });
         </script>
     </body>
