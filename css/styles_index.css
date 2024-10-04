@@ -1,0 +1,86 @@
+.comment-title {
+    font-size: 1.8rem; /* Tamaño del texto */
+    color: var(--text-color); /* Color del texto en modo claro */
+    text-align: left; /* Alinear el texto a la izquierda */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    transition: color var(--transition-time); /* Transición para el modo oscuro */
+}
+
+body.dark-mode .comment-title {
+    color: var(--text-color); /* Color del texto en modo oscuro */
+}
+
+p{
+    margin-top: 0rem;
+}
+
+#comment-box {
+    background-color: #f9f9f9; /* Color de fondo de la caja de comentarios */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    margin-bottom: 20px; /* Espacio inferior */
+    transition: background-color var(--transition-time); /* Transición para el modo oscuro */
+    display: flex;
+    flex-direction: column; /* Alinear los elementos en columna */
+    align-items: flex-start; /* Alinear los elementos a la izquierda */
+}
+
+body.dark-mode #comment-box {
+    background-color: #333; /* Fondo en modo oscuro */
+}
+
+#name-input, #comment-text {
+    width: 90%; /* Ancho del input y textarea */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color var(--transition-time); /* Transición para el modo oscuro */
+}
+
+body.dark-mode #name-input, body.dark-mode #comment-text {
+    border-color: #555; /* Color del borde en modo oscuro */
+}
+
+#submit-comment {
+    background-color: #4CAF50; /* Color del botón */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode #submit-comment {
+    background-color: #6bbf7a; /* Color del botón en modo oscuro */
+}
+
+#submit-comment:hover {
+    background-color: #45a049; /* Color en hover */
+}
+
+body.dark-mode #submit-comment:hover {
+    background-color: #5caa6d; /* Color en hover en modo oscuro */
+}
+
+.comment-list {
+    margin-top: 20px; /* Espacio superior */
+}
+
+.comment-item {
+    background-color: #f1f1f1; /* Color de fondo de cada comentario */
+    padding: 25px;
+    padding-left: 30px;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Espacio entre comentarios */
+    border-left: 5px solid #4CAF50; /* Borde a la izquierda */
+    transition: background-color var(--transition-time); /* Transición para el modo oscuro */
+    text-align: left;
+}
+
+body.dark-mode .comment-item {
+    background-color: #444; /* Fondo en modo oscuro */
+    border-left-color: #6bbf7a; /* Color del borde en modo oscuro */
+}
