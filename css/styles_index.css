@@ -1,50 +1,52 @@
 .comment-title {
-    font-size: 1.8rem; /* Tamaño del texto */
-    color: var(--text-color); /* Color del texto en modo claro */
-    text-align: left; /* Alinear el texto a la izquierda */
-    margin-bottom: 20px; /* Espacio debajo del título */
-    transition: color var(--transition-time); /* Transición para el modo oscuro */
+    font-family: "Pirata One", system-ui;
+    font-size: 50px;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 20px;
+    transition: color var(--transition-time);
 }
-
-body.dark-mode .comment-title {
-    color: var(--text-color); /* Color del texto en modo oscuro */
+body.dark-mode .left-section {
+    background-color: #333;
 }
-
-p{
+body.dark-mode .right-section {
+    background-color: #333;
+}
+body.dark-mode .comment-title { 
+    color: #ddd;
+}
+p {
     margin-top: 0rem;
 }
-
 #comment-box {
-    background-color: #f9f9f9; /* Color de fondo de la caja de comentarios */
+    background-color: #f9f9f9;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
-    margin-bottom: 20px; /* Espacio inferior */
-    transition: background-color var(--transition-time); /* Transición para el modo oscuro */
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0px 20px 20px 20px;
+    transition: background-color var(--transition-time);
     display: flex;
-    flex-direction: column; /* Alinear los elementos en columna */
-    align-items: flex-start; /* Alinear los elementos a la izquierda */
+    flex-direction: column;
+    align-items: flex-start;
 }
-
 body.dark-mode #comment-box {
-    background-color: #333; /* Fondo en modo oscuro */
+    background-color: #222;
+    color: #ddd;
 }
-
 #name-input, #comment-text {
-    width: 90%; /* Ancho del input y textarea */
+    width: 100%;
     padding: 10px;
+    margin-top: 5px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    transition: border-color var(--transition-time); /* Transición para el modo oscuro */
+    transition: border-color var(--transition-time);
 }
-
 body.dark-mode #name-input, body.dark-mode #comment-text {
-    border-color: #555; /* Color del borde en modo oscuro */
+    border-color: #555;
 }
-
-#submit-comment {
-    background-color: #4CAF50; /* Color del botón */
+#submit-comment, #toggle-comments {
+    background-color:  #6e6e6e;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -52,35 +54,82 @@ body.dark-mode #name-input, body.dark-mode #comment-text {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
-body.dark-mode #submit-comment {
-    background-color: #6bbf7a; /* Color del botón en modo oscuro */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
-
-#submit-comment:hover {
-    background-color: #45a049; /* Color en hover */
+#submit-comment, #toggle-comments {
+    width: 48%;
 }
-
-body.dark-mode #submit-comment:hover {
-    background-color: #5caa6d; /* Color en hover en modo oscuro */
+body.dark-mode #submit-comment, body.dark-mode #toggle-comments {
+    background-color: #555;
+    color: white;
 }
-
+body.dark-mode #submit-comment:hover, body.dark-mode #toggle-comments:hover {
+    background-color: #777;
+}
 .comment-list {
-    margin-top: 20px; /* Espacio superior */
+    margin: 20px 20px 20px 20px;
 }
-
 .comment-item {
-    background-color: #f1f1f1; /* Color de fondo de cada comentario */
+    background-color: #f1f1f1;
     padding: 25px;
     padding-left: 30px;
     border-radius: 5px;
-    margin-bottom: 10px; /* Espacio entre comentarios */
-    border-left: 5px solid #4CAF50; /* Borde a la izquierda */
-    transition: background-color var(--transition-time); /* Transición para el modo oscuro */
+    margin-bottom: 10px;
+    border-left: 5px solid  #6e6e6e;
+    transition: background-color var(--transition-time);
     text-align: left;
 }
-
 body.dark-mode .comment-item {
-    background-color: #444; /* Fondo en modo oscuro */
-    border-left-color: #6bbf7a; /* Color del borde en modo oscuro */
+    background-color: #444;
+    border-left-color:  #6e6e6e;
+}
+#main-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+}
+.left-section {
+    flex: 1.75;
+    padding: 10px;
+    padding-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.right-section {
+    flex: 1;
+    padding: 10px;
+    padding-top: 20px;
+    background-color: #f7f7f7;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.left-section, .right-section {
+    margin-top: 70px;
+}
+@media (max-width: 768px) {
+    #main-container {
+        flex-direction: column;
+    }
+}
+#main-container {
+    margin: 80px 10px 0px 10px;
+}
+.message {
+    margin-bottom: 20px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1em;
+    display: none;
+    text-align: center;
+    margin-top: -10px;
+}
+.success {
+    color: rgb(56, 147, 56);
+}
+.error {
+    color: rgb(255, 92, 92);
 }
